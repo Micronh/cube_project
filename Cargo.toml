@@ -1,0 +1,41 @@
+[package]
+name = "cube_app"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+winit = "0.30.10"
+cgmath = "0.18.0"
+wgpu = { version = "25.0.0", features = ["wgsl"] }
+bytemuck = { version = "1.23.0", features = ["derive"] }
+env_logger = "0.11.8"
+log = "0.4.27"
+pollster = "0.4.0"
+
+wasm-bindgen = "0.2.100"
+wasm-bindgen-futures = "0.4.50"
+console_error_panic_hook = "0.1.2"
+web-sys = { version = "0.3.77", features = [
+    "Window",
+    "Document",
+    "HtmlCanvasElement",
+    "HtmlElement",
+    "DomTokenList",
+    "CssStyleDeclaration",
+    "MouseEvent",
+    "KeyboardEvent",
+    "Element",
+    "console",
+] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2", features = ["js"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
