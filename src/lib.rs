@@ -3,7 +3,7 @@ use std::time::Instant;
 use winit::{
     application::ApplicationHandler,
     dpi::PhysicalSize,
-    event::{DeviceEvent, ElementState, WindowEvent}, // MODIFIED: Removed unused Event import
+    event::{DeviceEvent, ElementState, WindowEvent}, 
     event_loop::{ActiveEventLoop, ControlFlow, EventLoop},
     keyboard::{KeyCode, PhysicalKey},
     window::{CursorGrabMode, Window},
@@ -770,7 +770,6 @@ impl ApplicationHandler for State {
     }
 }
 
-// MODIFIED: Removed `mut` from event_loop
 pub async fn run_app_core(window: Arc<Window>, event_loop: EventLoop<()>) {
     let mut state = State::new(window.clone()).await;
 
@@ -784,7 +783,7 @@ pub async fn run_app_core(window: Arc<Window>, event_loop: EventLoop<()>) {
 #[wasm_bindgen::prelude::wasm_bindgen(start)]
 pub fn wasm_start_entry_point() {
     use std::sync::Arc;
-    use winit::event_loop::EventLoop; // Only import EventLoop
+    use winit::event_loop::EventLoop; 
     use winit::window::WindowAttributes;
 
     std::panic::set_hook(Box::new(console_error_panic_hook::hook));
@@ -798,7 +797,7 @@ pub fn wasm_start_entry_point() {
 
     let event_loop = EventLoop::new().expect("Failed to create event loop for WASM");
     let window_attributes = WindowAttributes::default().with_title("WASM Cube App");
-    #[allow(deprecated)] // Suppress deprecation warning
+    #[allow(deprecated)] 
     let window = Arc::new(
         event_loop
             .create_window(window_attributes)
